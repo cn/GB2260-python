@@ -37,7 +37,7 @@ class Division(object):
 
     def __eq__(self, other):
         if not isinstance(other, self.__class__):
-            return NotImplemented
+            raise NotImplemented
         return self.code == other.code and self.year == other.year
 
     @classmethod
