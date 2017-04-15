@@ -11,8 +11,12 @@ import sys
 
 
 def get_name_suffix(path):
-    path, _ = os.path.splitext(path)
-    splited = path.rsplit('-', 1)
+    if path.count('.tsv'):
+        splited, _ = os.path.splitext(path)
+        return splited
+    else:
+        path, _ = os.path.splitext(path)
+        splited = path.rsplit('-', 1)
     if len(splited) == 2:
         return splited[-1]
     return ''
@@ -38,13 +42,15 @@ def main():
         current_dict = data.setdefault(int(suffix) if suffix else None, {})
 
         with open(current_source, 'r') as source_file:
-            lines = source_file.readlines()[1:]
-            for line in lines:
-                print(line.strip().split())
-                code = line.strip().split()[2]
-                name = line.strip().split()[3]
-                current_dict[int(code)] = ensure_unicode(name)
-
+            if source_file.name.count('.tsv'):
+                lines = source_file.readlines()[1:]
+                for line in lines:
+                    _,_,code,name = line.strip().split()
+                    current_dict[int(code)] = ensure_unicode(name)
+            else:
+                for line in source_file:
+                    code, name = line.strip().split()
+                    current_dict[int(code)] = ensure_unicode(name)
     result = 'data = {0}'.format(repr(data))
     with open(destination, 'w') as destination_file:
         print(result, file=destination_file)
