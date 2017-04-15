@@ -38,8 +38,11 @@ def main():
         current_dict = data.setdefault(int(suffix) if suffix else None, {})
 
         with open(current_source, 'r') as source_file:
-            for line in source_file:
-                code, name = line.strip().split()
+            lines = source_file.readlines()[1:]
+            for line in lines:
+                print(line.strip().split())
+                code = line.strip().split()[2]
+                name = line.strip().split()[3]
                 current_dict[int(code)] = ensure_unicode(name)
 
     result = 'data = {0}'.format(repr(data))
