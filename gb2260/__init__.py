@@ -1,7 +1,19 @@
-from .division import Division
+from __future__ import absolute_import
+from __future__ import unicode_literals
 
-__version__ = '0.4.1'
-__all__ = ['Division', 'get', 'search']
+from gb2260.gb2260 import GB2260
+from gb2260.exceptions import (
+    GB2260Exception,
+    InvalidCode,
+    RevisionNotFound,
+    SourceNotFound,
+)
 
-get = Division.get
-search = Division.search
+
+__all__ = [
+    'GB2260',
+    'GB2260Exception',
+    'InvalidCode',
+    'RevisionNotFound',
+    'SourceNotFound',
+]
