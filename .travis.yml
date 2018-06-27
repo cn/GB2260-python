@@ -6,7 +6,7 @@ python:
   - "3.4"
   - "pypy"
 install:
-  - "pip install pytest pytest-cov pytest-pep8 coveralls"
+  - "pip install pytest pytest-cov pytest-pep8 pytest-mock coveralls"
 script: "make clean test"
 after_success: "coveralls"
 branches:
