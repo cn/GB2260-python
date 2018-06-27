@@ -1,6 +1,7 @@
 from __future__ import absolute_import
 from __future__ import unicode_literals
 
+import gb2260.code as dcode
 from gb2260._compat import ensure_str
 
 
@@ -47,3 +48,15 @@ class Division(object):
     @property
     def description(self):
         return self._revision.describe(self._code)
+
+    @property
+    def is_province(self):
+        return bool(dcode.PROVINCE_CODE_PATTERN.match(self._code))
+
+    @property
+    def is_prefecture(self):
+        return bool(dcode.PREFECTURE_CODE_PATTERN.match(self._code))
+
+    @property
+    def is_county(self):
+        return bool(dcode.COUNTY_CODE_PATTERN.match(self._code))
