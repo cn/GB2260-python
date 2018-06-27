@@ -57,3 +57,21 @@ def test_prefecture(revision, division):
 def test_description(revision, division):
     division.description
     revision.describe.assert_called_once_with(division.code)
+
+
+def test_is_province(mocker, division):
+    mocked = mocker.patch('gb2260.code.PROVINCE_CODE_PATTERN')
+    division.is_province
+    mocked.match.assert_called_once_with(division.code)
+
+
+def test_is_prefecture(mocker, division):
+    mocked = mocker.patch('gb2260.code.PREFECTURE_CODE_PATTERN')
+    division.is_prefecture
+    mocked.match.assert_called_once_with(division.code)
+
+
+def test_is_county(mocker, division):
+    mocked = mocker.patch('gb2260.code.COUNTY_CODE_PATTERN')
+    division.is_county
+    mocked.match.assert_called_once_with(division.code)
