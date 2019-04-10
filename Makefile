@@ -20,7 +20,3 @@ clean:
 
 gb2260/data/__init__.py: data/revisions.json
 	$(PYTHON) generate.py $?
-
-data/GB2260*.txt:
-	git submodule init
-	git submodule update
